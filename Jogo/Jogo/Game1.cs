@@ -11,6 +11,7 @@ namespace Jogo
         Texture2D textura;
 
         Player player;
+        Camara camera;
 
         public Game1()
         {
@@ -34,34 +35,29 @@ namespace Jogo
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            textura = Content.Load<Texture2D>("Kirbycook");
+            textura = Content.Load<Texture2D>("Crianca");
 
             player = new Player(textura);
+            camera = new Camara(_graphics.GraphicsDevice.Viewport);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            player.Update();
+            player.Update(gameTime); // passar gameTime
+            camera.Follow(player.posicao); // fazer a câmera seguir o jogador
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
-            KeyboardState keypress = Keyboard.GetState();
-            if (keypress.IsKeyDown(Keys.Left))
-            {
-                
-            }
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.YellowGreen);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(textura, new Vector2(100, 100), null, Color.White, 0f, Vector2.Zero, 3f, SpriteEffects.None, 0f);
+            _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.Transform);
+            _spriteBatch.Draw(Content.Load<Texture2D>("Casa_background"), new Rectangle(0, 0, 3800, 3800), Color.White);
             player.Draw(_spriteBatch);
             _spriteBatch.End();
 
