@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\inimigo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\inimigo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\camara.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\camara.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\content\\crianca.png||{58961B49-13E0-48C0-9258-13CBC4D40279}",
+      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\content\\crianca.png||{58961B49-13E0-48C0-9258-13CBC4D40279}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,28 +35,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Player.cs",
-              "RelativeDocumentMoniker": "Jogo\\Player.cs",
-              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Player.cs",
-              "RelativeToolTip": "Jogo\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAABaAAAAAAAAAA==",
+              "Title": "Game1.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Game1.cs",
+              "RelativeDocumentMoniker": "Jogo\\Game1.cs",
+              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Game1.cs",
+              "RelativeToolTip": "Jogo\\Game1.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAkwEAAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-06T10:24:06.123Z",
+              "WhenOpened": "2026-05-05T14:35:38.589Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Game1.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Game1.cs",
-              "RelativeDocumentMoniker": "Jogo\\Game1.cs",
-              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Game1.cs",
-              "RelativeToolTip": "Jogo\\Game1.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAzwCcAAAAkAAAAAAAAAA==",
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Player.cs",
+              "RelativeDocumentMoniker": "Jogo\\Player.cs",
+              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Player.cs",
+              "RelativeToolTip": "Jogo\\Player.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-05T14:35:38.589Z",
+              "WhenOpened": "2026-05-06T10:24:06.123Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
@@ -67,12 +75,36 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "Inimigo.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Inimigo.cs",
+              "RelativeDocumentMoniker": "Jogo\\Inimigo.cs",
+              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Inimigo.cs",
+              "RelativeToolTip": "Jogo\\Inimigo.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAADgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-12T12:52:30.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Crianca.png",
+              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Content\\Crianca.png",
+              "RelativeDocumentMoniker": "Jogo\\Content\\Crianca.png",
+              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Content\\Crianca.png",
+              "RelativeToolTip": "Jogo\\Content\\Crianca.png",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2026-05-10T22:51:07.375Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Camara.cs",
               "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Camara.cs",
               "RelativeDocumentMoniker": "Jogo\\Camara.cs",
               "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Camara.cs",
               "RelativeToolTip": "Jogo\\Camara.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-10T21:13:06.518Z"
             }

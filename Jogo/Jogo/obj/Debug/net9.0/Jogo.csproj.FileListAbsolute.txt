@@ -33,5 +33,5 @@ C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\obj\Deb
 C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\obj\Debug\net9.0\Jogo.genruntimeconfig.cache
 C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\obj\Debug\net9.0\ref\Jogo.dll
 C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Debug\net9.0\Content\Kirbycook.xnb
-C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Debug\net9.0\Content\Casa_background.xnb
 C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Debug\net9.0\Content\Crianca.xnb
+C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Debug\net9.0\Content\Casa.xnb

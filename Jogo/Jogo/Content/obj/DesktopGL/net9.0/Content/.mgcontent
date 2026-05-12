@@ -4,7 +4,7 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Casa_background.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Casa.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Crianca.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Kirbycook.png</File>
   </SourceFiles>

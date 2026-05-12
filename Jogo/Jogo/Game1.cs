@@ -12,6 +12,7 @@ namespace Jogo
 
         Player player;
         Camara camera;
+        Inimigo inimigo;
 
         public Game1()
         {
@@ -37,8 +38,9 @@ namespace Jogo
             // TODO: use this.Content to load your game content here
             textura = Content.Load<Texture2D>("Crianca");
 
-            player = new Player(textura);
+            player = new Player(textura, 10);
             camera = new Camara(_graphics.GraphicsDevice.Viewport);
+            inimigo = new Inimigo(Content.Load<Texture2D>("Kirbcook"), new Vector2(200, 200), speed: 120f, vida: 10, viewRadius: 600f, stopDistance: 50f);
         }
 
         protected override void Update(GameTime gameTime)
@@ -47,7 +49,8 @@ namespace Jogo
             camera.Follow(player.posicao); // fazer a câmera seguir o jogador
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
+            
+            inimigo.Update(gameTime, player.posicao); // atualizar o inimigo
             base.Update(gameTime);
         }
 
@@ -57,8 +60,9 @@ namespace Jogo
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.Transform);
-            _spriteBatch.Draw(Content.Load<Texture2D>("Casa_background"), new Rectangle(0, 0, 3800, 3800), Color.White);
+            _spriteBatch.Draw(Content.Load<Texture2D>("Casa"), new Rectangle(0, 0, 3800, 3800), Color.White);
             player.Draw(_spriteBatch);
+            inimigo.Draw(_spriteBatch);
             _spriteBatch.End();
 
             base.Draw(gameTime);

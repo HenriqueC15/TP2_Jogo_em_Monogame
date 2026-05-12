@@ -9,12 +9,14 @@ namespace Jogo
         Texture2D textura;
         public Vector2 posicao;
         float speed; // pixels por segundo
+        public int vida;
 
-        public Player(Texture2D textura)
+        public Player(Texture2D textura, int vida)
         {
             this.textura = textura;
+            this.vida = vida;
             // inicializa num ponto visível (ajuste conforme necessário)
-            posicao = new Vector2(500, 250);
+            posicao = new Vector2(450, 2800);
             speed = 300f;
         }
 
@@ -39,8 +41,8 @@ namespace Jogo
             }
 
             // limita dentro da janela (valores hardcoded conforme Game1)
-            //posicao.X = MathHelper.Clamp(posicao.X, 0, 1280 - textura.Width);
-            //posicao.Y = MathHelper.Clamp(posicao.Y, 0, 720 - textura.Height);
+            posicao.X = MathHelper.Clamp(posicao.X, 16, 3800 - textura.Width);
+            posicao.Y = MathHelper.Clamp(posicao.Y, 0, 3500 - textura.Height);
         }
 
         public void Draw(SpriteBatch spriteBatch)

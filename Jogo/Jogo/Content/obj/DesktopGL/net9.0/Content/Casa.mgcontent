@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Casa_background.png</SourceFile>
-  <SourceTime>2026-05-10T22:54:11.9031606+01:00</SourceTime>
-  <DestFile>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/bin/DesktopGL/Content/Casa_background.xnb</DestFile>
-  <DestTime>2026-05-10T22:55:51.566653+01:00</DestTime>
+  <SourceFile>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Casa.png</SourceFile>
+  <SourceTime>2026-05-12T13:45:24.1275264+01:00</SourceTime>
+  <DestFile>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/bin/DesktopGL/Content/Casa.xnb</DestFile>
+  <DestTime>2026-05-12T13:46:24.0250357+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-10-20T15:25:32+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
