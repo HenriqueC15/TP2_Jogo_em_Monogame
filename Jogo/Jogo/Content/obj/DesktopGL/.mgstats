@@ -1,1 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/inimigo_1.png","C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/bin/DesktopGL/inimigo_1.xnb","TextureProcessor","Texture2DContent",17563,1048661,0,2381904
+"C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/inimigo_2.png","C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/bin/DesktopGL/inimigo_2.xnb","TextureProcessor","Texture2DContent",19884,1048661,0,0449879
+"C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/inimigo_3.png","C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/bin/DesktopGL/inimigo_3.xnb","TextureProcessor","Texture2DContent",18722,1048661,0,0384045

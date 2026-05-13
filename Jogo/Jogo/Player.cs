@@ -4,50 +4,160 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Jogo
 {
+    internal enum Direction
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
     internal class Player
     {
         Texture2D textura;
         public Vector2 posicao;
         float speed; // pixels por segundo
         public int vida;
+        public int dano = 1;
+        public int tiro = 5;
+        public bool IsAttacking = false;
+        public bool attackfinish = true;
+        public bool takedamage = false;
 
-        public Player(Texture2D textura, int vida)
+        public Direction Facing{ get; private set; }
+
+        // estados para ataque e input
+        private KeyboardState previousKeyboardState;
+        private float attackTimer = 0f;
+        private float couldownTimer = 0f;
+        private const float attackDuration = 0.2f;
+        private bool justAttacked = false;
+
+        public Player(Texture2D textura, int vida = 20)
         {
             this.textura = textura;
             this.vida = vida;
-            // inicializa num ponto visível (ajuste conforme necessário)
             posicao = new Vector2(450, 2800);
             speed = 300f;
+            Facing = Direction.Down;
+            previousKeyboardState = Keyboard.GetState();
         }
 
-        // agora recebe gameTime e calcula movimento por segundo
+        public Rectangle Hitbox
+        {
+            get
+            {
+                return new Rectangle((int)posicao.X, (int)posicao.Y, 150, 150);
+            }
+        }
+        public Rectangle AttackHitbox
+        {
+            get
+            {
+                switch (Facing)
+                {
+                    case Direction.Up:
+                        return new Rectangle((int)posicao.X, (int)posicao.Y -40, 150, 60);
+
+                    case Direction.Down:
+                        return new Rectangle((int)posicao.X, (int)posicao.Y +130, 150, 60);
+
+                    case Direction.Left:
+                        return new Rectangle((int)posicao.X - 40, (int)posicao.Y, 60, 150);
+
+                    case Direction.Right:
+                        return new Rectangle((int)posicao.X + 130, (int)posicao.Y, 60, 150);
+                }
+
+                return Rectangle.Empty;
+            }
+        }
+
+        // retorna true apenas uma vez quando o ataque começar; consome o flag
+        public bool ConsumeJustAttacked()
+        {
+            if (justAttacked)
+            {
+                justAttacked = false;
+                return true;
+            }
+            return false;
+        }
+
         public void Update(GameTime gameTime)
         {
-            KeyboardState ks = Keyboard.GetState();
+            KeyboardState currentState = Keyboard.GetState();
             Vector2 dir = Vector2.Zero;
 
-            if (ks.IsKeyDown(Keys.A) || ks.IsKeyDown(Keys.Left)) dir.X -= 1;
-            if (ks.IsKeyDown(Keys.D) || ks.IsKeyDown(Keys.Right)) dir.X += 1;
-            if (ks.IsKeyDown(Keys.W) || ks.IsKeyDown(Keys.Up)) dir.Y -= 1;
-            if (ks.IsKeyDown(Keys.S) || ks.IsKeyDown(Keys.Down)) dir.Y += 1;
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Se quiser bloquear diagonais (apenas 4 direções), descomente:
-            // if (dir.X != 0) dir.Y = 0;
+            if (currentState.IsKeyDown(Keys.A)) dir.X -= 1;
+            if (currentState.IsKeyDown(Keys.D)) dir.X += 1;
+            if (currentState.IsKeyDown(Keys.W)) dir.Y -= 1;
+            if (currentState.IsKeyDown(Keys.S)) dir.Y += 1;
 
             if (dir != Vector2.Zero)
             {
-                dir.Normalize(); // mantém velocidade constante em diagonais (se permitido)
-                posicao += dir * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if(dir.X > 0) Facing = Direction.Right;
+                else if (dir.X < 0) Facing = Direction.Left;
+                else if (dir.Y > 0) Facing = Direction.Down;
+                else if (dir.Y < 0) Facing = Direction.Up;
+                dir.Normalize();
+                posicao += dir * speed * delta;
             }
 
-            // limita dentro da janela (valores hardcoded conforme Game1)
+            // detectar início do ataque (apenas quando tecla for pressionada neste frame)
+            // só inicia ataque se o cooldown estiver zerado
+            if (currentState.IsKeyDown(Keys.Space) && previousKeyboardState.IsKeyUp(Keys.Space) && couldownTimer <= 0f)
+            {
+                IsAttacking = true;
+                attackTimer = attackDuration;
+                couldownTimer = 1f;
+                attackfinish = false;
+                justAttacked = true; // sinaliza que devemos aplicar dano uma vez
+            }
+
+            if ( couldownTimer > 0f)//somente atualiza timers se estivermos no meio do ataque ou cooldown
+            {
+                couldownTimer -= delta;
+                if (couldownTimer < 0f) couldownTimer = 0f;
+                if (couldownTimer == 0f) attackfinish = true;
+            }
+            if (IsAttacking)
+            {
+                attackTimer -= delta;
+
+                if (attackTimer <= 0f)
+                {
+                    IsAttacking = false;
+                    attackTimer = 0f;
+                }
+            }
+
+            // atualiza previous para o próximo frame
+            previousKeyboardState = currentState;
+
+            // limita dentro do mapa
             posicao.X = MathHelper.Clamp(posicao.X, 16, 3800 - textura.Width);
             posicao.Y = MathHelper.Clamp(posicao.Y, 0, 3500 - textura.Height);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void receberDano(int dano)// método público para receber dano
         {
-            spriteBatch.Draw(textura, new Rectangle((int)posicao.X, (int)posicao.Y, 150, 150), Color.White);
+            vida -= dano;
+            if (vida < 0) vida = 0;
+            takedamage = true; // sinaliza que o jogador recebeu dano
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Texture2D pixel)
+        {
+            Color tint = Color.White;
+            // desenha hitbox de ataque enquanto o ataque estiver ativo
+            if (IsAttacking)
+                spriteBatch.Draw(pixel, AttackHitbox, Color.Red * 0.5f);
+            if (takedamage) tint = Color.Red; // indicador de dano recente
+
+            spriteBatch.Draw(pixel, Hitbox, Color.Red * 0.5f);
+            spriteBatch.Draw(textura, Hitbox, tint);
         }
     }
 }

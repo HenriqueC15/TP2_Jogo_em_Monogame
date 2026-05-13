@@ -40,7 +40,7 @@
               "RelativeDocumentMoniker": "Jogo\\Game1.cs",
               "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Game1.cs",
               "RelativeToolTip": "Jogo\\Game1.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAkwEAAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwDIAAABfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-05T14:35:38.589Z",
               "IsPinned": true,
@@ -54,11 +54,10 @@
               "RelativeDocumentMoniker": "Jogo\\Player.cs",
               "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Player.cs",
               "RelativeToolTip": "Jogo\\Player.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAQwCIAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-06T10:24:06.123Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -80,10 +79,9 @@
               "RelativeDocumentMoniker": "Jogo\\Inimigo.cs",
               "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Inimigo.cs",
               "RelativeToolTip": "Jogo\\Inimigo.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAADgAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAFgAAAAAAAAAAAAkwGAAAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-12T12:52:30.792Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-12T12:52:30.792Z"
             },
             {
               "$type": "Document",
