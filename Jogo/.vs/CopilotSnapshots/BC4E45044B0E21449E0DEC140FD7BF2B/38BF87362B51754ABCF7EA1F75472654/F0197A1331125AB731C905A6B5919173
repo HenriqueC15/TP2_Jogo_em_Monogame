@@ -1,0 +1,57 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Jogo
+{
+    internal class Map
+    {
+        // posição de origem do mapa
+        public Vector2 localizacao;
+        public Texture2D textura;
+
+        // lista de retângulos usados para colisão no mapa
+        public List<Rectangle> CollisionRects { get; private set; }
+
+        // checkpoint do jogador
+        public Vector2 PlayerCheckpoint { get; private set; }
+
+        // checkpoints usados para respawn / spawn dos inimigos
+        public List<Vector2> EnemyCheckpoints { get; private set; }
+
+        public Map()
+        {
+            localizacao = new Vector2(0, 0);
+            CollisionRects = new List<Rectangle>();
+            EnemyCheckpoints = new List<Vector2>();
+            // valor padrão do checkpoint do jogador
+            PlayerCheckpoint = new Vector2(450, 2800);
+        }
+
+        // --- Colisões ---
+        public void AddCollision(Rectangle rect) => CollisionRects.Add(rect);
+        public void RemoveCollision(Rectangle rect) => CollisionRects.Remove(rect);
+        public void ClearCollisions() => CollisionRects.Clear();
+
+        // retorna true se o retângulo informado colide com alguma área de colisão do mapa
+        public bool IsColliding(Rectangle rect)
+        {
+            for (int i = 0; i < CollisionRects.Count; i++)
+            {
+                if (CollisionRects[i].Intersects(rect)) return true;
+            }
+            return false;
+        }
+
+        // --- Checkpoints ---
+        public void SetPlayerCheckpoint(Vector2 pos) => PlayerCheckpoint = pos;
+        public void ResetPlayerCheckpoint() => PlayerCheckpoint = new Vector2(450, 2800);
+
+        public void AddEnemyCheckpoint(Vector2 pos) => EnemyCheckpoints.Add(pos);
+        public void ClearEnemyCheckpoints() => EnemyCheckpoints.Clear();
+        public Vector2 GetEnemyCheckpoint(int index) => (index >= 0 && index < EnemyCheckpoints.Count) ? EnemyCheckpoints[index] : Vector2.Zero;
+    }
+}

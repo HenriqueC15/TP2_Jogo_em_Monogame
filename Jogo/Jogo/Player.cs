@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Jogo
 {
@@ -17,26 +18,30 @@ namespace Jogo
         public Vector2 posicao;
         float speed; // pixels por segundo
         public int vida;
-        public int dano = 1;
+        public int dano = 2;
         public int tiro = 5;
         public bool IsAttacking = false;
         public bool attackfinish = true;
         public bool takedamage = false;
+
+        List<Projetil> projetis = new List<Projetil>();
+        Texture2D projetil;
 
         public Direction Facing{ get; private set; }
 
         // estados para ataque e input
         private KeyboardState previousKeyboardState;
         private float attackTimer = 0f;
-        private float couldownTimer = 0f;
+        private float couldownattack = 0f;
+        private float couldowntiro = 0f;
         private const float attackDuration = 0.2f;
         private bool justAttacked = false;
 
-        public Player(Texture2D textura, int vida = 20)
+        public Player(Texture2D textura, Vector2 posicaoinicial, int vida)
         {
             this.textura = textura;
             this.vida = vida;
-            posicao = new Vector2(450, 2800);
+            this.posicao = posicaoinicial;
             speed = 300f;
             Facing = Direction.Down;
             previousKeyboardState = Keyboard.GetState();
@@ -49,6 +54,8 @@ namespace Jogo
                 return new Rectangle((int)posicao.X, (int)posicao.Y, 150, 150);
             }
         }
+
+        // hitbox de ataque baseada na direção do jogador
         public Rectangle AttackHitbox
         {
             get
@@ -83,7 +90,7 @@ namespace Jogo
             return false;
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, List<Projetil> projetis)
         {
             KeyboardState currentState = Keyboard.GetState();
             Vector2 dir = Vector2.Zero;
@@ -101,26 +108,41 @@ namespace Jogo
                 else if (dir.X < 0) Facing = Direction.Left;
                 else if (dir.Y > 0) Facing = Direction.Down;
                 else if (dir.Y < 0) Facing = Direction.Up;
+                
                 dir.Normalize();
                 posicao += dir * speed * delta;
             }
 
             // detectar início do ataque (apenas quando tecla for pressionada neste frame)
             // só inicia ataque se o cooldown estiver zerado
-            if (currentState.IsKeyDown(Keys.Space) && previousKeyboardState.IsKeyUp(Keys.Space) && couldownTimer <= 0f)
+            if (currentState.IsKeyDown(Keys.Space) && previousKeyboardState.IsKeyUp(Keys.Space) && couldownattack <= 0f)
             {
                 IsAttacking = true;
                 attackTimer = attackDuration;
-                couldownTimer = 1f;
+                couldownattack = 0.5f;
                 attackfinish = false;
                 justAttacked = true; // sinaliza que devemos aplicar dano uma vez
             }
 
-            if ( couldownTimer > 0f)//somente atualiza timers se estivermos no meio do ataque ou cooldown
+            if (currentState.IsKeyDown(Keys.Q) && previousKeyboardState.IsKeyUp(Keys.Q))
             {
-                couldownTimer -= delta;
-                if (couldownTimer < 0f) couldownTimer = 0f;
-                if (couldownTimer == 0f) attackfinish = true;
+                if (couldowntiro <= 0f)
+                {
+                    projetis.Add(new Projetil(this.posicao, Facing, 400f, 700));
+                    couldowntiro = 3f;
+                }
+            }
+
+            if(couldowntiro > 0f)
+            {
+                couldowntiro -= delta;
+                if (couldowntiro < 0f) couldowntiro = 0f;
+            }
+            if ( couldownattack > 0f)//somente atualiza timers se estivermos no meio do ataque ou cooldown
+            {
+                couldownattack -= delta;
+                if (couldownattack < 0f) couldownattack = 0f;
+                if (couldownattack == 0f) attackfinish = true;
             }
             if (IsAttacking)
             {

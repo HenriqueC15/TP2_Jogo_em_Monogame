@@ -26,8 +26,8 @@ namespace Jogo
 
         public bool IsAlive => vida > 0;
         public bool takedamage = false;
-
-        public Inimigo(Texture2D textura, Vector2 posicaoInicial, float speed = 120f, int vida = 10, float viewRadius = 400f, float stopDistance = 40f)
+        public bool isTakedamage = false;
+        public Inimigo(Texture2D textura, Vector2 posicaoInicial, int vida, float speed = 150f, float viewRadius = 400f, float stopDistance = 40f)
         {
             this.textura = textura;
             this.posicao = posicaoInicial;
@@ -75,7 +75,7 @@ namespace Jogo
             }
 
             // lógica de ataque: se estiver perto o bastante e cooldown zerado, aplica dano ao jogador
-            if (dist <= attackRange + 75f) // +75 porque a hitbox do inimigo tem 150x150, ajuste se necessário
+            if (dist <= attackRange + 70f) // +70 porque a hitbox do inimigo tem 150x150, ajuste se necessário
             {
                 if (attackCooldownTimer == 0f)
                 {
@@ -89,13 +89,14 @@ namespace Jogo
             posicao.Y = MathHelper.Clamp(posicao.Y, 0, 3500 - 150);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Texture2D pixel)
         {
             if (!IsAlive) return;
 
             Color tint = Color.White;
             if (vida <= 2) tint = Color.OrangeRed; // indicador simples de dano
             if (takedamage) tint = Color.Red; // indicador de dano recente
+            spriteBatch.Draw(pixel, Hitbox, Color.Red * 0.5f);
             spriteBatch.Draw(textura, new Rectangle((int)posicao.X, (int)posicao.Y, 150, 150), tint);
         }
 

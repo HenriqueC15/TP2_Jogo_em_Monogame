@@ -79,7 +79,7 @@ namespace Jogo
             UpdateTransform();
         }
 
-        private void UpdateTransform()
+        private void UpdateTransform()// Calcula a matriz de transformação da câmera
         {
             Transform =
                 Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0f)) *

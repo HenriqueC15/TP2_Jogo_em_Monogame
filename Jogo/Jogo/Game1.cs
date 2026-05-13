@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Jogo
 {
@@ -15,6 +16,9 @@ namespace Jogo
         Player player;
         Camara camera;
         Inimigo inimigo;
+        Projetil projetil;
+        Map mapa;
+        List<Projetil> projetis = new List<Projetil>();
 
         public Game1()
         {
@@ -41,23 +45,45 @@ namespace Jogo
             textura = Content.Load<Texture2D>("Crianca");
             pixel = new Texture2D(GraphicsDevice, 1, 1);
 
+            mapa = new Map();
+            mapa.ResetPlayerCheckpoint();
+
             playerlife = new Texture2D(GraphicsDevice, 1, 1);
             playerlife.SetData(new[] { Color.White });
 
             pixel.SetData(new[] { Color.White });
 
-            player = new Player(textura);
+            player = new Player(textura, mapa.PlayerCheckpoint, 25);
+
             camera = new Camara(_graphics.GraphicsDevice.Viewport);
-            inimigo = new Inimigo(Content.Load<Texture2D>("inimigo_3"), new Vector2(200, 200));
+
+            inimigo = new Inimigo(Content.Load<Texture2D>("inimigo_1"), new Vector2(920, 1180), 10);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            player.Update(gameTime); // passar gameTime
+            //player.Update(gameTime); // passar gameTime
             camera.Follow(player.posicao); // fazer a câmera seguir o jogador
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            
+            player.Update(gameTime, projetis);
+            // 2. O Game1 gerencia a VIDA dos projéteis (Mover e Colidir)
+            for (int i = projetis.Count - 1; i >= 0; i--)
+            {
+                projetis[i].Update(gameTime);
+
+                // Checar colisão com inimigos (que estão no Game1)
+                if (projetis[i].Bounds.Intersects(inimigo.Hitbox))
+                {
+                    inimigo.ReceberDano(player.tiro);
+                    projetis[i].Ativo = false;
+                }
+
+                // Remover da lista se o tiro morreu ou sumiu
+                if (!projetis[i].Ativo)
+                    projetis.RemoveAt(i);
+            }
+
             // atualizar o inimigo (se existir)
             if (inimigo != null && inimigo.IsAlive)
             {
@@ -89,14 +115,20 @@ namespace Jogo
             // TODO: Add your drawing code here
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.Transform);
             _spriteBatch.Draw(Content.Load<Texture2D>("TesteCasa"), new Rectangle(0, 0, 3800, 3800), Color.White);
+            _spriteBatch.Draw(Content.Load<Texture2D>("Mobilia_2"), new Rectangle(0, 0, 3800, 3800), Color.White);
+            _spriteBatch.Draw(Content.Load<Texture2D>("Mobilia_1"), new Rectangle(0, 0, 3800, 3800), Color.White);
+            foreach (var item in projetis)
+            {
+                item.Draw(_spriteBatch, pixel);
+            }
             player.Draw(_spriteBatch, pixel);
-            if (inimigo != null) inimigo.Draw(_spriteBatch);
+            if (inimigo != null) inimigo.Draw(_spriteBatch, pixel);
             _spriteBatch.End();
 
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(pixel, new Rectangle(20, 50, 200, 20), Color.White);
-            _spriteBatch.Draw(pixel, new Rectangle(20, 50, player.vida * 10, 20), Color.Red);
+            _spriteBatch.Draw(pixel, new Rectangle(20, 50, player.vida * 8, 20), Color.Red);
 
             _spriteBatch.End();
 
