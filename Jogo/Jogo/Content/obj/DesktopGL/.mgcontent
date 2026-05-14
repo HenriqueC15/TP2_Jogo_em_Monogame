@@ -5,21 +5,45 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/almofada.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/ataque_boss.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/bara_vida_1.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/barra_de_texto.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Boss.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Casa_background.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Casa_mobilia_1.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Casa_mobilia_2.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Colissoes_mobilia_2.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/crianca_walk_down.gif</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/crianca_walk_left.gif</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/crianca_walk_right.gif</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/crianca_walk_up.gif</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Crianca.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/fosforo_1.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/fosforo_2.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/inimigo_1.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/inimigo_2.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/inimigo_3.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Kirbycook.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/lanterna.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Parede_Colissao.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/pilha.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Tela_morte.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/vela_1.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/vela_2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

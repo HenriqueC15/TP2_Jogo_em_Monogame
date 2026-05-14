@@ -53,11 +53,12 @@ namespace Jogo
                 return new Rectangle((int)posicao.X, (int)posicao.Y, 150, 150);
             }
         }
+
         public Rectangle HitboxColissao
         {
             get
             {
-                return new Rectangle((int)posicao.X+25, (int)posicao.Y +90 , 100, 60);
+                return new Rectangle((int)posicao.X + 25, (int)posicao.Y + 90, 100, 60);
             }
         }
 
@@ -156,7 +157,8 @@ namespace Jogo
             {
                 if (couldowntiro <= 0f)
                 {
-                    projetis.Add(new Projetil(this.posicao, Facing, 400f, 700));
+                    // projétil do jogador (IsFromBoss = false)
+                    projetis.Add(new Projetil(this.posicao, Facing, 400f, 700, isFromBoss: false));
                     couldowntiro = 3f;
                 }
             }
@@ -205,7 +207,8 @@ namespace Jogo
             if (IsAttacking)
                 spriteBatch.Draw(pixel, AttackHitbox, Color.Red * 0.5f);
             if (takedamage) tint = Color.Red; // indicador de dano recente
-            spriteBatch.Draw(pixel, HitboxColissao, Color.Blue * 0.5f); // hitbox de colisão para debug
+            spriteBatch.Draw(pixel, HitboxColissao, Color.Blue * 0.5f);
+
             spriteBatch.Draw(pixel, Hitbox, Color.Red * 0.5f);
             spriteBatch.Draw(textura, Hitbox, tint);
         }

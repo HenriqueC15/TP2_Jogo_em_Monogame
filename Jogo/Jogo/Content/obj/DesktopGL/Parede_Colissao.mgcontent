@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/Parede_Colissao.png</SourceFile>
-  <SourceTime>2026-05-14T11:58:39.3459334+01:00</SourceTime>
+  <SourceTime>2026-05-14T13:16:22.9338494+01:00</SourceTime>
   <DestFile>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/bin/DesktopGL/Parede_Colissao.xnb</DestFile>
-  <DestTime>2026-05-14T12:00:44.9024+01:00</DestTime>
+  <DestTime>2026-05-14T15:08:08.4134097+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-10-20T15:25:32+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

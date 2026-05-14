@@ -17,16 +17,20 @@ namespace Jogo
         public bool Ativo;
         public float Dano = 5;
 
+        // Marca se o projétil foi lançado pelo boss (true) ou pelo jogador/inimigos (false)
+        public bool IsFromBoss { get; private set; }
+
         // Colisão (Hitbox)
         public Rectangle Bounds => new Rectangle((int)Posicao.X + 40, (int)Posicao.Y + 40, 80, 80);
 
-        public Projetil(Vector2 posicaoInicial, Direction facing, float velocidadeTiro, float alcance)
+        public Projetil(Vector2 posicaoInicial, Direction facing, float velocidadeTiro, float alcance, bool isFromBoss = false)
         {
             Posicao = posicaoInicial;
             PosicaoInicial = posicaoInicial;
             AlcanceMaximo = alcance;
             Facing = facing;
             Ativo = true;
+            IsFromBoss = isFromBoss;
 
             Vector2 direcao = Vector2.Zero;
             switch (facing)

@@ -10,11 +10,12 @@ namespace Jogo
         // origem do mapa no mundo
         public Vector2 localizacao;
 
-        // textura visual do mapa (tile/visual)
+        // textura visual do mapa
         public Texture2D textura;
-        // textura usada apenas como máscara de colisões (alpha > 0 = sólido)
-        private Texture2D texturaColisao;
-        private Color[] dadosCores;
+
+        // máscaras de colisão (p.ex. mobilia e parede)
+        private readonly List<Texture2D> collisionTextures = new List<Texture2D>();
+        private readonly List<Color[]> collisionColors = new List<Color[]>();
 
         private float larguraDesenho;
         private float alturaDesenho;
@@ -22,7 +23,7 @@ namespace Jogo
         private Texture2D texturaDebug;
         public bool MostrarDebug = false;
 
-        // retângulos de colisão em coordenadas do MUNDO
+        // retângulos de colisão em coordenadas do MUNDO (combinação de todas as máscaras)
         public List<Rectangle> CollisionRects { get; private set; }
 
         // checkpoint do jogador
@@ -31,11 +32,11 @@ namespace Jogo
         // checkpoints para inimigos
         public List<Vector2> EnemyCheckpoints { get; private set; }
 
-        public Map(Texture2D texturaVisual, Texture2D texturaColisao, float larguraDesejada, float alturaDesejada, GraphicsDevice gd)
+        // Construtor que aceita duas máscaras: mobilia e paredes (ambas 3800x3800 no seu caso)
+        public Map(Texture2D texturaVisual, Texture2D colisaoMobilia, Texture2D colisaoParede, float larguraDesejada, float alturaDesejada, GraphicsDevice gd)
         {
             localizacao = Vector2.Zero;
             this.textura = texturaVisual;
-            this.texturaColisao = texturaColisao;
             this.larguraDesenho = larguraDesejada;
             this.alturaDesenho = alturaDesejada;
 
@@ -43,30 +44,54 @@ namespace Jogo
             EnemyCheckpoints = new List<Vector2>();
             PlayerCheckpoint = new Vector2(450, 2800);
 
-            // extrai pixels da máscara uma vez
-            dadosCores = new Color[this.texturaColisao.Width * this.texturaColisao.Height];
-            this.texturaColisao.GetData(dadosCores);
+            // adiciona máscaras (pode passar null se não existir)
+            if (colisaoMobilia != null) AddCollisionTexture(colisaoMobilia);
+            if (colisaoParede != null) AddCollisionTexture(colisaoParede);
 
-            // constrói retângulos de colisão a partir da máscara (pré-processamento)
+            // constrói rects a partir das máscaras
             BuildCollisionRectangles();
 
             CriarTexturaDebug(gd);
         }
 
+        private void AddCollisionTexture(Texture2D tex)
+        {
+            collisionTextures.Add(tex);
+            var colors = new Color[tex.Width * tex.Height];
+            tex.GetData(colors);
+            collisionColors.Add(colors);
+        }
+
         private void CriarTexturaDebug(GraphicsDevice gd)
         {
-            texturaDebug = new Texture2D(gd, texturaColisao.Width, texturaColisao.Height);
-            Color[] pixelsDebug = new Color[dadosCores.Length];
+            if (collisionTextures.Count == 0) return;
 
-            for (int i = 0; i < dadosCores.Length; i++)
+            int w = collisionTextures[0].Width;
+            int h = collisionTextures[0].Height;
+            texturaDebug = new Texture2D(gd, w, h);
+            Color[] pixels = new Color[w * h];
+
+            // combina as máscaras com cores diferentes:
+            // primeiro mask -> vermelho, segundo -> azul. sobreposição -> magenta.
+            for (int i = 0; i < pixels.Length; i++)
+                pixels[i] = Color.Transparent;
+
+            for (int t = 0; t < collisionTextures.Count; t++)
             {
-                // alpha > 0 -> sólido
-                if (dadosCores[i].A > 0)
-                    pixelsDebug[i] = Color.Red * 0.5f;
-                else
-                    pixelsDebug[i] = Color.Transparent;
+                var colors = collisionColors[t];
+                for (int i = 0; i < colors.Length; i++)
+                {
+                    if (colors[i].A > 0)
+                    {
+                        if (pixels[i] == Color.Transparent)
+                            pixels[i] = (t == 0) ? Color.Red * 0.6f : Color.Blue * 0.6f;
+                        else
+                            pixels[i] = Color.Magenta * 0.6f; // sobreposição
+                    }
+                }
             }
-            texturaDebug.SetData(pixelsDebug);
+
+            texturaDebug.SetData(pixels);
         }
 
         // --- Checkpoints ---
@@ -74,119 +99,125 @@ namespace Jogo
         public void ResetPlayerCheckpoint() => PlayerCheckpoint = new Vector2(320, 2850);
 
         public void AddEnemyCheckpoint(Vector2 pos) => EnemyCheckpoints.Add(pos);
+
+        /*
+        public void AparicaoInimigos(Inimigo inimigo, Player player)
+        {
+            if(player.Vela && player.Lanterna && player.fosforos)
+            {
+
+            }
+            else if(player.chave)
+            {
+                inimigo.posicao = new Vector2(450, 2800); inimigo.posicao.Normalize();
+            }
+
+        }*/
         public void ClearEnemyCheckpoints() => EnemyCheckpoints.Clear();
 
-        // --- Construção de CollisionRects ---
-        // Converte máscara (pixels) em retângulos mesclados para uso em colisões rápidas.
+        // --- Construção de CollisionRects a partir de todas as máscaras ---
         private void BuildCollisionRectangles()
         {
             CollisionRects.Clear();
+            if (collisionTextures.Count == 0) return;
 
-            int w = texturaColisao.Width;
-            int h = texturaColisao.Height;
-
-            // **Etapa 1**: gera runs (segmentos) por linha
-            var runsByRow = new List<List<(int x, int width)>>(h);
-            for (int y = 0; y < h; y++)
+            // processa cada máscara separadamente e adiciona seus rects convertidos para coordenadas do mundo
+            for (int t = 0; t < collisionTextures.Count; t++)
             {
-                var runs = new List<(int x, int width)>();
-                int x = 0;
-                while (x < w)
-                {
-                    // encontra início do run sólido
-                    while (x < w && !IsSolidPixel(x, y)) x++;
-                    if (x >= w) break;
-                    int start = x;
-                    while (x < w && IsSolidPixel(x, y)) x++;
-                    int runWidth = x - start;
-                    runs.Add((start, runWidth));
-                }
-                runsByRow.Add(runs);
-            }
+                var tex = collisionTextures[t];
+                var colors = collisionColors[t];
+                int w = tex.Width;
+                int h = tex.Height;
 
-            // **Etapa 2**: mescla runs verticalmente em retângulos
-            var activeRects = new List<Rectangle>(); // retângulos em progresso (em coordenadas de textura)
-            for (int y = 0; y < h; y++)
-            {
-                var newActive = new List<Rectangle>();
-                var runs = runsByRow[y];
-
-                foreach (var run in runs)
+                // runs por linha
+                var runsByRow = new List<List<(int x, int width)>>(h);
+                for (int y = 0; y < h; y++)
                 {
-                    bool extended = false;
-                    for (int i = 0; i < activeRects.Count; i++)
+                    var runs = new List<(int x, int width)>();
+                    int x = 0;
+                    while (x < w)
                     {
-                        var r = activeRects[i];
-                        // se o run encaixa exatamente em cima do rect ativo (mesmo X e Width)
-                        if (r.X == run.x && r.Width == run.width && r.Y + r.Height == y)
+                        while (x < w && !IsSolid(colors, w, x, y)) x++;
+                        if (x >= w) break;
+                        int start = x;
+                        while (x < w && IsSolid(colors, w, x, y)) x++;
+                        runs.Add((start, x - start));
+                    }
+                    runsByRow.Add(runs);
+                }
+
+                // mescla runs verticalmente
+                var activeRects = new List<Rectangle>();
+                for (int y = 0; y < h; y++)
+                {
+                    var newActive = new List<Rectangle>();
+                    var runs = runsByRow[y];
+
+                    foreach (var run in runs)
+                    {
+                        bool extended = false;
+                        for (int i = 0; i < activeRects.Count; i++)
                         {
-                            // extende a altura do rect
-                            r.Height += 1;
-                            newActive.Add(r);
-                            activeRects[i] = Rectangle.Empty; // marca como usado
-                            extended = true;
-                            break;
+                            var r = activeRects[i];
+                            if (r.X == run.x && r.Width == run.width && r.Y + r.Height == y)
+                            {
+                                r.Height += 1;
+                                newActive.Add(r);
+                                activeRects[i] = Rectangle.Empty;
+                                extended = true;
+                                break;
+                            }
+                        }
+                        if (!extended)
+                        {
+                            newActive.Add(new Rectangle(run.x, y, run.width, 1));
                         }
                     }
-                    if (!extended)
+
+                    // finaliza rects não estendidas
+                    foreach (var r in activeRects)
                     {
-                        // cria novo rect com altura 1
-                        newActive.Add(new Rectangle(run.x, y, run.width, 1));
+                        if (r != Rectangle.Empty && r.Height > 0) CollisionRects.Add(r);
                     }
+
+                    activeRects = newActive;
                 }
 
-                // finaliza quaisquer rects ativas que não foram estendidas nesta linha
                 foreach (var r in activeRects)
+                    if (r != Rectangle.Empty && r.Height > 0) CollisionRects.Add(r);
+
+                // converte rects de textura para mundo aplicando escala e offset
+                float scaleX = larguraDesenho > 0 ? (float)larguraDesenho / tex.Width : 1f;
+                float scaleY = alturaDesenho > 0 ? (float)alturaDesenho / tex.Height : 1f;
+
+                var converted = new List<Rectangle>(CollisionRects.Count);
+                foreach (var tr in CollisionRects)
                 {
-                    if (r != Rectangle.Empty && r.Height > 0)
-                    {
-                        CollisionRects.Add(r);
-                    }
+                    int wx = (int)Math.Round(localizacao.X + tr.X * scaleX);
+                    int wy = (int)Math.Round(localizacao.Y + tr.Y * scaleY);
+                    int ww = Math.Max(1, (int)Math.Round(tr.Width * scaleX));
+                    int wh = Math.Max(1, (int)Math.Round(tr.Height * scaleY));
+                    converted.Add(new Rectangle(wx, wy, ww, wh));
                 }
 
-                activeRects = newActive;
+                // substitui a lista por esses rects e segue para próxima máscara
+                CollisionRects = converted;
             }
-
-            // adiciona restos
-            foreach (var r in activeRects)
-                if (r != Rectangle.Empty && r.Height > 0)
-                    CollisionRects.Add(r);
-
-            // **Etapa 3**: converte rects de coordenadas de textura para coordenadas do MUNDO (aplica escala e offset)
-            float scaleX = larguraDesenho > 0 ? (float)larguraDesenho / w : 1f;
-            float scaleY = alturaDesenho > 0 ? (float)alturaDesenho / h : 1f;
-
-            var worldRects = new List<Rectangle>(CollisionRects.Count);
-            foreach (var tr in CollisionRects)
-            {
-                int wx = (int)Math.Round(localizacao.X + tr.X * scaleX);
-                int wy = (int)Math.Round(localizacao.Y + tr.Y * scaleY);
-                int ww = Math.Max(1, (int)Math.Round(tr.Width * scaleX));
-                int wh = Math.Max(1, (int)Math.Round(tr.Height * scaleY));
-                worldRects.Add(new Rectangle(wx, wy, ww, wh));
-            }
-
-            CollisionRects = worldRects;
         }
 
-        private bool IsSolidPixel(int tx, int ty)
+        private bool IsSolid(Color[] colors, int width, int x, int y)
         {
-            if (tx < 0 || tx >= texturaColisao.Width || ty < 0 || ty >= texturaColisao.Height)
-                return false;
-            int idx = tx + ty * texturaColisao.Width;
-            // alpha > 0 => sólido
-            return dadosCores[idx].A > 0;
+            int idx = x + y * width;
+            return colors[idx].A > 0;
         }
 
         // --- Colisões em runtime: checagem por interseção com os retângulos pré-computados ---
         public bool VerificarColisaoObjeto(Rectangle rect)
         {
             if (rect.IsEmpty) return false;
-            // testamos interseção com cada rect (pode ser otimizado com spatial partition se necessário)
             for (int i = 0; i < CollisionRects.Count; i++)
             {
-                if (rect.Intersects(CollisionRects[i]))
-                    return true;
+                if (rect.Intersects(CollisionRects[i])) return true;
             }
             return false;
         }
@@ -195,9 +226,7 @@ namespace Jogo
         {
             var p = new Point((int)ponto.X, (int)ponto.Y);
             foreach (var r in CollisionRects)
-            {
                 if (r.Contains(p)) return true;
-            }
             return false;
         }
 
@@ -220,11 +249,8 @@ namespace Jogo
                 spriteBatch.Draw(textura, localizacao, Color.White);
 
             var destino = new Rectangle((int)localizacao.X, (int)localizacao.Y, (int)larguraDesenho, (int)alturaDesenho);
-            if (texturaColisao != null)
-                spriteBatch.Draw(texturaColisao, destino, Color.White * 0.0f); // não visível por padrão
-
             if (MostrarDebug && texturaDebug != null)
-                spriteBatch.Draw(texturaDebug, destino, Color.White * 0.5f);
+                spriteBatch.Draw(texturaDebug, destino, Color.White * 0.6f);
         }
     }
 }

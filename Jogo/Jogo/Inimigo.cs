@@ -27,7 +27,7 @@ namespace Jogo
         public bool IsAlive => vida > 0;
         public bool takedamage = false;
         public bool isTakedamage = false;
-        public Inimigo(Texture2D textura, Vector2 posicaoInicial, int vida, float speed = 150f, float viewRadius = 400f, float stopDistance = 40f)
+        public Inimigo(Texture2D textura, Vector2 posicaoInicial, int vida, float speed = 250f, float viewRadius = 400f, float stopDistance = 40f)
         {
             this.textura = textura;
             this.posicao = posicaoInicial;
