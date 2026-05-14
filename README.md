@@ -2,7 +2,7 @@
 
 # The Fear within me
 
-Em criança o mundo era diferente... Acreditavamos em contos fantasiosos, como o pai-natal e fada dos dentes, mas tambem em monstros que alimentavam os nossos medos.
+Em criança o mundo era diferente... Acreditavamos em contos fantasiosos, como o pai-natal e a fada dos dentes, mas tambem em monstros que alimentavam os nossos medos.
 Num dia de tempestade Mia adormece no sofá enquanto via desenhos animados, mas acorda com o som estrondoso de um trovão que manda a eletricidade a baixo. Mia, envolta pela escuridão, tenta procurar fontes de luz para se guiar até ao seu lugar de comforto, o quarto. Mas o medo do escuro fala mais alto.
 Enfrenta os teus medos...
 
