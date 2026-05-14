@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Jogo
 {
@@ -32,7 +28,6 @@ namespace Jogo
             Facing = facing;
             Ativo = true;
 
-            // Garante que a direção esteja normalizada (tamanho 1) para a velocidade ser constante
             Vector2 direcao = Vector2.Zero;
             switch (facing)
             {
@@ -56,18 +51,32 @@ namespace Jogo
             Velocidade = direcao * velocidadeTiro;
         }
 
+        // Atualização sem mapa (mantido para compatibilidade)
         public void Update(GameTime gameTime)
         {
             if (!Ativo) return;
 
-            // 1. Move o projétil baseado no tempo (Independente de FPS)
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Posicao.X += Velocidade.X * deltaTime;
-            Posicao.Y += Velocidade.Y * deltaTime;
+            Posicao += Velocidade * deltaTime;
 
-            // 2. Verifica se passou da distância máxima
             float distanciaPercorrida = Vector2.Distance(PosicaoInicial, Posicao);
             if (distanciaPercorrida >= AlcanceMaximo)
+            {
+                Ativo = false;
+            }
+        }
+
+        // Nova sobrecarga: atualiza e verifica colisão com o mapa.
+        // Use esta assinatura se quiser que o projétil colida com a textura do mapa.
+        public void Update(GameTime gameTime, Map map)
+        {
+            if (!Ativo) return;
+
+            // Reuse a lógica de movimento
+            Update(gameTime);
+
+            // Se colidiu com o mapa, desativa
+            if (map != null && map.VerificarColisaoObjeto(Bounds))
             {
                 Ativo = false;
             }
@@ -77,10 +86,8 @@ namespace Jogo
         {
             if (Ativo)
             {
-                // Desenha o tiro (aqui usamos a cor amarela para destacar)
-                spriteBatch.Draw(textura, Bounds, Color.Purple);
+                spriteBatch.Draw(textura, Bounds, Color.White);
             }
         }
-
     }
 }

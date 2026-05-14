@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\projetil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\projetil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\boss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|solutionrelative:jogo\\boss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EBFBBBB1-C39E-D7F9-4A61-B0B8B943E913}|Jogo\\Jogo.csproj|c:\\users\\danie\\onedrive\\documentos\\github\\tp2_jogo_em_monogame\\jogo\\jogo\\camara.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,17 +38,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Game1.cs",
               "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Game1.cs",
               "RelativeDocumentMoniker": "Jogo\\Game1.cs",
               "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Game1.cs",
               "RelativeToolTip": "Jogo\\Game1.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAkwIIAAABKAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAqwH8AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-05T14:35:38.589Z",
               "IsPinned": true,
@@ -52,13 +56,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Player.cs",
               "RelativeDocumentMoniker": "Jogo\\Player.cs",
               "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Player.cs",
               "RelativeToolTip": "Jogo\\Player.cs",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAwwHkAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAIwDwAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-06T10:24:06.123Z",
               "IsPinned": true,
@@ -84,44 +88,57 @@
               "RelativeDocumentMoniker": "Jogo\\Projetil.cs",
               "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Projetil.cs",
               "RelativeToolTip": "Jogo\\Projetil.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAiwBgAAABZAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-13T16:43:56.998Z",
+              "WhenOpened": "2026-05-14T01:50:30.793Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
+              "Title": "Boss.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Boss.cs",
+              "RelativeDocumentMoniker": "Jogo\\Boss.cs",
+              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Boss.cs",
+              "RelativeToolTip": "Jogo\\Boss.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-13T20:45:12.671Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Map.cs",
               "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Map.cs",
               "RelativeDocumentMoniker": "Jogo\\Map.cs",
               "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Map.cs",
               "RelativeToolTip": "Jogo\\Map.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAzwE0AAABPAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAA1wD8AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-13T15:23:28.839Z"
+              "WhenOpened": "2026-05-13T15:23:28.839Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Inimigo.cs",
               "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Inimigo.cs",
               "RelativeDocumentMoniker": "Jogo\\Inimigo.cs",
               "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Inimigo.cs",
               "RelativeToolTip": "Jogo\\Inimigo.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwFsAAABBAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAwCoAAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-12T12:52:30.792Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Camara.cs",
               "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Camara.cs",
               "RelativeDocumentMoniker": "Jogo\\Camara.cs",
               "ToolTip": "C:\\Users\\danie\\OneDrive\\Documentos\\GitHub\\TP2_Jogo_em_Monogame\\Jogo\\Jogo\\Camara.cs",
               "RelativeToolTip": "Jogo\\Camara.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAowFEAAABUAAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAzwFEAAABUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-10T21:13:06.518Z"
             }

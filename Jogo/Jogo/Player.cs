@@ -16,8 +16,8 @@ namespace Jogo
     {
         Texture2D textura;
         public Vector2 posicao;
-        float speed; // pixels por segundo
         public int vida;
+        public float speed = 300f; // pixels por segundo
         public int dano = 2;
         public int tiro = 5;
         public bool IsAttacking = false;
@@ -42,7 +42,6 @@ namespace Jogo
             this.textura = textura;
             this.vida = vida;
             this.posicao = posicaoinicial;
-            speed = 300f;
             Facing = Direction.Down;
             previousKeyboardState = Keyboard.GetState();
         }
@@ -52,6 +51,13 @@ namespace Jogo
             get
             {
                 return new Rectangle((int)posicao.X, (int)posicao.Y, 150, 150);
+            }
+        }
+        public Rectangle HitboxColissao
+        {
+            get
+            {
+                return new Rectangle((int)posicao.X+25, (int)posicao.Y +90 , 100, 60);
             }
         }
 
@@ -90,7 +96,8 @@ namespace Jogo
             return false;
         }
 
-        public void Update(GameTime gameTime, List<Projetil> projetis)
+        // Atualizado: recebe Map para checar colisões
+        public void Update(GameTime gameTime, List<Projetil> projetis, Map map)
         {
             KeyboardState currentState = Keyboard.GetState();
             Vector2 dir = Vector2.Zero;
@@ -110,7 +117,28 @@ namespace Jogo
                 else if (dir.Y < 0) Facing = Direction.Up;
                 
                 dir.Normalize();
-                posicao += dir * speed * delta;
+            }
+
+            // Calcula deslocamento desejado
+            Vector2 desloc = dir * speed * delta;
+
+            // Move por eixo e desfaz se houver colisão com o mapa (evita "deslizamento")
+            if (desloc.X != 0f)
+            {
+                posicao.X += desloc.X;
+                if (map != null && map.VerificarColisaoObjeto(HitboxColissao))
+                {
+                    posicao.X -= desloc.X; // revertendo movimento X
+                }
+            }
+
+            if (desloc.Y != 0f)
+            {
+                posicao.Y += desloc.Y;
+                if (map != null && map.VerificarColisaoObjeto(HitboxColissao))
+                {
+                    posicao.Y -= desloc.Y; // revertendo movimento Y
+                }
             }
 
             // detectar início do ataque (apenas quando tecla for pressionada neste frame)
@@ -158,7 +186,7 @@ namespace Jogo
             // atualiza previous para o próximo frame
             previousKeyboardState = currentState;
 
-            // limita dentro do mapa
+            // limita dentro do mapa (ajusta estes valores conforme teu mundo)
             posicao.X = MathHelper.Clamp(posicao.X, 16, 3800 - textura.Width);
             posicao.Y = MathHelper.Clamp(posicao.Y, 0, 3500 - textura.Height);
         }
@@ -177,7 +205,7 @@ namespace Jogo
             if (IsAttacking)
                 spriteBatch.Draw(pixel, AttackHitbox, Color.Red * 0.5f);
             if (takedamage) tint = Color.Red; // indicador de dano recente
-
+            spriteBatch.Draw(pixel, HitboxColissao, Color.Blue * 0.5f); // hitbox de colisão para debug
             spriteBatch.Draw(pixel, Hitbox, Color.Red * 0.5f);
             spriteBatch.Draw(textura, Hitbox, tint);
         }

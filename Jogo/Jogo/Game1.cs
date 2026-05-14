@@ -10,6 +10,7 @@ namespace Jogo
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         Texture2D textura;
+        Texture2D mobilia;
         public Texture2D pixel;
         public Texture2D playerlife;
 
@@ -41,11 +42,13 @@ namespace Jogo
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            // Carrega a imagem onde as partes pintadas são os móveis
+            mobilia = Content.Load<Texture2D>("Colissoes_mobilia_2");
+            mapa = new Map(mobilia, mobilia, 3800, 3800, GraphicsDevice);
+
             // TODO: use this.Content to load your game content here
             textura = Content.Load<Texture2D>("Crianca");
             pixel = new Texture2D(GraphicsDevice, 1, 1);
-
-            mapa = new Map();
             mapa.ResetPlayerCheckpoint();
 
             playerlife = new Texture2D(GraphicsDevice, 1, 1);
@@ -62,11 +65,16 @@ namespace Jogo
 
         protected override void Update(GameTime gameTime)
         {
-            //player.Update(gameTime); // passar gameTime
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             camera.Follow(player.posicao); // fazer a câmera seguir o jogador
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            player.Update(gameTime, projetis);
+
+            // Removed manual per-point checks. Player.Update agora resolve colisões usando LowerHitbox.
+            player.Update(gameTime, projetis, mapa);
+
             // 2. O Game1 gerencia a VIDA dos projéteis (Mover e Colidir)
             for (int i = projetis.Count - 1; i >= 0; i--)
             {
@@ -114,12 +122,13 @@ namespace Jogo
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera.Transform);
-            _spriteBatch.Draw(Content.Load<Texture2D>("TesteCasa"), new Rectangle(0, 0, 3800, 3800), Color.White);
-            _spriteBatch.Draw(Content.Load<Texture2D>("Mobilia_2"), new Rectangle(0, 0, 3800, 3800), Color.White);
-            _spriteBatch.Draw(Content.Load<Texture2D>("Mobilia_1"), new Rectangle(0, 0, 3800, 3800), Color.White);
+            _spriteBatch.Draw(Content.Load<Texture2D>("Casa_background"), new Rectangle(0, 0, 3800, 3800), Color.White);
+            _spriteBatch.Draw(Content.Load<Texture2D>("Casa_mobilia_1"), new Rectangle(0, 0, 3800, 3800), Color.White);
+            _spriteBatch.Draw(Content.Load<Texture2D>("Casa_mobilia_2"), new Rectangle(0, 0, 3800, 3800), Color.White);
+            mapa.Draw(_spriteBatch);
             foreach (var item in projetis)
             {
-                item.Draw(_spriteBatch, pixel);
+                item.Draw(_spriteBatch, Content.Load<Texture2D>("almofada"));
             }
             player.Draw(_spriteBatch, pixel);
             if (inimigo != null) inimigo.Draw(_spriteBatch, pixel);
