@@ -101,7 +101,24 @@ namespace Jogo
 
             pixel.SetData(new[] { Color.White });
 
-            player = new Player(textura, mapa.PlayerCheckpoint, 25);
+            // carrega texturas de animação
+            Texture2D walkRight = Content.Load<Texture2D>("crianca_walk_right_sps");
+            Texture2D walkLeft = Content.Load<Texture2D>("crianca_walk_left_sps");
+            Texture2D walkUp = Content.Load<Texture2D>("crianca_walk_up_sps");
+            Texture2D walkDown = Content.Load<Texture2D>("crianca_walk_down_sps");
+
+            // carrega texturas de ataque especial
+            Texture2D texturaAttackRight = Content.Load<Texture2D>("ataque_direita_sps");
+            Texture2D texturaAttackDown = Content.Load<Texture2D>("ataque_frente_sps");
+            Texture2D texturaAttackLeft = Content.Load<Texture2D>("ataque_esquerda_sps");
+
+            Texture2D atackespecialRght = Content.Load<Texture2D>("ataque_especial_direita_sps");
+            Texture2D atackespecialLeft = Content.Load<Texture2D>("ataque_especial_esquerda_sps");
+            //Texture2D atackespecialUp = Content.Load<Texture2D>("ataque_especial_up_sps");
+            Texture2D atackespecialDown = Content.Load<Texture2D>("ataque_especial_frente_sps");
+
+            player = new Player(textura, mapa.PlayerCheckpoint, 25, walkRight, walkLeft, walkUp, walkDown, atackespecialDown, atackespecialLeft, atackespecialRght
+                , texturaAttackDown, texturaAttackRight, texturaAttackLeft);
             //boss = new Boss(Content.Load<Texture2D>("Boss"), new Vector2(2970, 300));
             camera = new Camara(_graphics.GraphicsDevice.Viewport);
 
@@ -364,7 +381,7 @@ namespace Jogo
 
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             _spriteBatch.Draw(Content.Load<Texture2D>("bara_vida_1"), new Rectangle(10, 40, 231, 60), Color.White);
-            _spriteBatch.Draw(pixel, new Rectangle(25, 60, player.vida * 8, 20), Color.FromNonPremultiplied(24, 0, 24 ,255));
+            _spriteBatch.Draw(pixel, new Rectangle(25, 60, player.vida * 8, 20), Color.FromNonPremultiplied(24, 0, 24, 255));
             // barra de vida do boss (aparece apenas se o boss tiver sido ativado)
             if (Bossapareceu)
             {
