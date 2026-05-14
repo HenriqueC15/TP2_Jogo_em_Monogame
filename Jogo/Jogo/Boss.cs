@@ -5,26 +5,26 @@ using System.Collections.Generic;
 
 namespace Jogo
 {
-    // Boss estático: vida = 100, não se move, atira projéteis contra o Player em direções cardeais.
     internal class Boss
     {
         private Texture2D textura;
         public Vector2 posicao;
         public int vida = 100;
+        public int dano = 3;
 
         private float shootTimer = 0f;
-        private readonly float shootInterval; // segundos entre tiros
+        private readonly float shootInterval; // segundos entre tiros (mínimo 0.2f)
         private readonly float detectRange; // distância máxima para começar a atirar
         private readonly float projectileSpeed;
         private readonly float projectileRange;
 
         public bool IsAlive => vida > 0;
 
-        public Boss(Texture2D textura, Vector2 posicaoInicial, float shootIntervalSeconds = 2.0f, float detectRange = 1200f, float projectileSpeed = 400f, float projectileRange = 1200f)
+        public Boss(Texture2D textura, Vector2 posicaoInicial, float shootIntervalSeconds = 0.2f, float detectRange = 600f, float projectileSpeed = 600f, float projectileRange = 600f)
         {
             this.textura = textura;
             this.posicao = posicaoInicial;
-            this.shootInterval = Math.Max(0.1f, shootIntervalSeconds);
+            this.shootInterval = Math.Max(0.2f, shootIntervalSeconds);
             this.detectRange = detectRange;
             this.projectileSpeed = projectileSpeed;
             this.projectileRange = projectileRange;
@@ -35,12 +35,10 @@ namespace Jogo
         {
             get
             {
-                // ajusta conforme a sua textura; usa 200x200 por padrão
                 return new Rectangle((int)posicao.X, (int)posicao.Y, 400, 400);
             }
         }
 
-        // Atualiza estado e atira em direções cardeais, adicionando os projéteis à lista fornecida.
         public void Update(GameTime gameTime, Player player, List<Projetil> projetis)
         {
             if (!IsAlive) return;
@@ -50,33 +48,37 @@ namespace Jogo
             shootTimer -= delta;
             if (shootTimer > 0f) return;
 
+            // Centro do boss
+            Vector2 bossCenter = new Vector2(posicao.X + Hitbox.Width / 2f, posicao.Y + Hitbox.Height / 2f);
+
+            // Centro do player(Hitbox.Width = 150, Hitbox.Height = 150)
+            //Vector2 playerCenter = new Vector2(player.posicao.X + 80f, player.posicao.Y + 75f);
+            // Centro do player usando a hitbox (mais preciso)
+            Vector2 playerCenter = player.Hitbox.Center.ToVector2();
+
             // Só atira se o jogador estiver dentro do alcance de detecção
-            Vector2 toPlayer = player.posicao - posicao;
+            Vector2 toPlayer = playerCenter - bossCenter;
             float dist = toPlayer.Length();
+
             if (dist > detectRange)
             {
+                // Se estiver fora do alcance, espera um intervalo antes de checar novamente
                 shootTimer = 0.5f;
                 return;
             }
 
-            // Escolhe a direção cardinal mais próxima do vetor para o jogador
-            Direction dir;
-            if (Math.Abs(toPlayer.X) >= Math.Abs(toPlayer.Y))
-            {
-                dir = toPlayer.X >= 0 ? Direction.Right : Direction.Left;
-            }
-            else
-            {
-                dir = toPlayer.Y >= 0 ? Direction.Down : Direction.Up;
-            }
+            // Normaliza o vetor para apontar diretamente ao jogador
+            Vector2 direcao = toPlayer;
+            if (direcao != Vector2.Zero)
+                direcao.Normalize();
 
-            // Ponto de spawn do projétil: centro aproximado do boss
-            var spawn = new Vector2(posicao.X + Hitbox.Width / 2f - 40f, posicao.Y + Hitbox.Height / 2f - 40f);
+            // Ponto de spawn do projétil: centro do boss
+            var spawn = bossCenter;
 
-            // Cria e adiciona o projétil marcado como vindo do boss (IsFromBoss = true)
-            projetis.Add(new Projetil(spawn, dir, projectileSpeed, projectileRange, isFromBoss: true));
+            // Dispara o projétil
+            projetis.Add(new Projetil(spawn, direcao, projectileSpeed, projectileRange, isFromBoss: true));
 
-            // reseta o timer
+            // Reseta o timer com o intervalo de tiro
             shootTimer = shootInterval;
         }
 
@@ -86,13 +88,10 @@ namespace Jogo
             if (vida < 0) vida = 0;
         }
 
-        // Método específico do boss para verificar se o ataque do jogador acertou.
-        // Centraliza a lógica de aplicar dano quando o jogador realiza um ataque corpo-a-corpo.
         public void CheckAndApplyPlayerAttack(Player player)
         {
             if (!IsAlive || player == null) return;
 
-            // ConsumeJustAttacked garante que o dano do ataque do jogador é aplicado apenas uma vez
             if (player.IsAttacking && player.ConsumeJustAttacked())
             {
                 if (player.AttackHitbox.Intersects(this.Hitbox))

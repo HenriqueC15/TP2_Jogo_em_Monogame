@@ -1,0 +1,107 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+
+namespace Jogo
+{
+    internal class Boss
+    {
+        private Texture2D textura;
+        public Vector2 posicao;
+        public int vida = 100;
+        public int dano = 3;
+
+        private float shootTimer = 0f;
+        private readonly float shootInterval; // segundos entre tiros (mínimo 0.2f)
+        private readonly float detectRange; // distância máxima para começar a atirar
+        private readonly float projectileSpeed;
+        private readonly float projectileRange;
+
+        public bool IsAlive => vida > 0;
+
+        public Boss(Texture2D textura, Vector2 posicaoInicial, float shootIntervalSeconds = 0.2f, float detectRange = 1600f, float projectileSpeed = 600f, float projectileRange = 1200f)
+        {
+            this.textura = textura;
+            this.posicao = posicaoInicial;
+            this.shootInterval = Math.Max(0.2f, shootIntervalSeconds);
+            this.detectRange = detectRange;
+            this.projectileSpeed = projectileSpeed;
+            this.projectileRange = projectileRange;
+            this.shootTimer = this.shootInterval * 0.5f; // pequeno atraso inicial
+        }
+
+        public Rectangle Hitbox
+        {
+            get
+            {
+                return new Rectangle((int)posicao.X, (int)posicao.Y, 400, 400);
+            }
+        }
+
+        public void Update(GameTime gameTime, Player player, List<Projetil> projetis)
+        {
+            if (!IsAlive) return;
+            if (player == null || projetis == null) return;
+
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            shootTimer -= delta;
+            if (shootTimer > 0f) return;
+
+            // Só atira se o jogador estiver dentro do alcance de detecção
+            Vector2 toPlayer = player.posicao - posicao;
+            float dist = toPlayer.Length();
+            
+            if (dist > detectRange)
+            {
+                // Se estiver fora do alcance, espera um intervalo antes de checar novamente
+                shootTimer = 0.5f;
+                return;
+            }
+
+            // Normaliza o vetor para apontar diretamente ao jogador
+            Vector2 direcao = toPlayer;
+            if (direcao != Vector2.Zero)
+                direcao.Normalize();
+
+            // Ponto de spawn do projétil: centro aproximado do boss
+            var spawn = new Vector2(posicao.X + Hitbox.Width / 2f - 40f, posicao.Y + Hitbox.Height / 2f - 40f);
+
+            // Dispara o projétil
+            projetis.Add(new Projetil(spawn, direcao, projectileSpeed, projectileRange, isFromBoss: true));
+
+            // Reseta o timer com o intervalo de tiro
+            shootTimer = shootInterval;
+        }
+
+        public void ReceberDano(int dano)
+        {
+            vida -= dano;
+            if (vida < 0) vida = 0;
+        }
+
+        public void CheckAndApplyPlayerAttack(Player player)
+        {
+            if (!IsAlive || player == null) return;
+
+            if (player.IsAttacking && player.ConsumeJustAttacked())
+            {
+                if (player.AttackHitbox.Intersects(this.Hitbox))
+                {
+                    ReceberDano(player.dano);
+                }
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Texture2D pixel)
+        {
+            if (!IsAlive) return;
+
+            if (pixel != null)
+                spriteBatch.Draw(pixel, Hitbox, Color.Red * 0.5f);
+
+            if (textura != null)
+                spriteBatch.Draw(textura, new Rectangle((int)posicao.X, (int)posicao.Y, Hitbox.Width, Hitbox.Height), Color.White);
+        }
+    }
+}

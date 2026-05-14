@@ -4,6 +4,10 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/4x4 SF Spritesheet.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/5x5 SF Spritesheet.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/8x8 Wide Spritesheet.png</File>
+    <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/9x9 Font Spritesheet.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/almofada.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/ataque_boss.png</File>
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/bara_vida_1.png</File>
@@ -32,6 +36,10 @@
     <File>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/vela_2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

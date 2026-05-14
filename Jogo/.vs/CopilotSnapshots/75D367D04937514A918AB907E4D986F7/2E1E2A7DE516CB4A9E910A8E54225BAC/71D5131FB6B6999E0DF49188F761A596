@@ -1,0 +1,118 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+
+namespace Jogo
+{
+    internal class Projetil
+    {
+        public Vector2 Posicao;
+        public Vector2 Velocidade;
+        public Vector2 PosicaoInicial;
+
+        public Direction Facing { get; private set; }
+
+        // Configurações do Tiro
+        public float AlcanceMaximo;
+        public bool Ativo;
+        public float Dano = 5;
+
+        // Marca se o projétil foi lançado pelo boss (true) ou pelo jogador/inimigos (false)
+        public bool IsFromBoss { get; private set; }
+
+        // Colisão (Hitbox)
+        public Rectangle Bounds => new Rectangle((int)Posicao.X + 40, (int)Posicao.Y + 40, 80, 80);
+
+        // Construtor existente (direções cardeais)
+        public Projetil(Vector2 posicaoInicial, Direction facing, float velocidadeTiro, float alcance, bool isFromBoss = false)
+        {
+            Posicao = posicaoInicial;
+            PosicaoInicial = posicaoInicial;
+            AlcanceMaximo = alcance;
+            Facing = facing;
+            Ativo = true;
+            IsFromBoss = isFromBoss;
+
+            Vector2 direcao = Vector2.Zero;
+            switch (facing)
+            {
+                case Direction.Up:
+                    direcao = Vector2.UnitY * -1;
+                    break;
+                case Direction.Down:
+                    direcao = Vector2.UnitY;
+                    break;
+                case Direction.Left:
+                    direcao = Vector2.UnitX * -1;
+                    break;
+                case Direction.Right:
+                    direcao = Vector2.UnitX;
+                    break;
+            }
+
+            if (direcao != Vector2.Zero)
+                direcao.Normalize();
+
+            Velocidade = direcao * velocidadeTiro;
+        }
+
+        // Novo construtor: aceita direção arbitrária (útil para atirar diretamente ao player)
+        public Projetil(Vector2 posicaoInicial, Vector2 direcaoNormalizada, float velocidadeTiro, float alcance, bool isFromBoss = false)
+        {
+            Posicao = posicaoInicial;
+            PosicaoInicial = posicaoInicial;
+            AlcanceMaximo = alcance;
+            Ativo = true;
+            IsFromBoss = isFromBoss;
+
+            if (direcaoNormalizada != Vector2.Zero)
+            {
+                direcaoNormalizada.Normalize();
+                Velocidade = direcaoNormalizada * velocidadeTiro;
+            }
+            else
+            {
+                Velocidade = Vector2.Zero;
+            }
+        }
+
+        // Atualização sem mapa (mantido para compatibilidade)
+        public void Update(GameTime gameTime)
+        {
+            if (!Ativo) return;
+
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Posicao += Velocidade * deltaTime;
+
+            float distanciaPercorrida = Vector2.Distance(PosicaoInicial, Posicao);
+            if (distanciaPercorrida >= AlcanceMaximo)
+            {
+                Ativo = false;
+            }
+        }
+
+        // Nova sobrecarga: atualiza e verifica colisão com o mapa.
+        // Use esta assinatura se quiser que o projétil colida com a textura do mapa.
+        public void Update(GameTime gameTime, Map map)
+        {
+            if (!Ativo) return;
+
+            // Reuse a lógica de movimento
+            Update(gameTime);
+
+            // Se colidiu com o mapa, desativa
+            if (map != null && map.VerificarColisaoObjeto(Bounds))
+            {
+                Ativo = false;
+            }
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Texture2D textura)
+        {
+            if (Ativo)
+            {
+                spriteBatch.Draw(textura, Bounds, Color.White);
+            }
+        }
+    }
+}
