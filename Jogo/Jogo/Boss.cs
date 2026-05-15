@@ -9,8 +9,8 @@ namespace Jogo
     {
         private Texture2D textura;
         public Vector2 posicao;
-        public int vida = 100;
-        public int dano = 3;
+        public int vida = 40;
+        public int dano = 1;
 
         private float shootTimer = 0f;
         private readonly float shootInterval; // segundos entre tiros (mínimo 0.2f)
@@ -20,7 +20,7 @@ namespace Jogo
 
         public bool IsAlive => vida > 0;
 
-        public Boss(Texture2D textura, Vector2 posicaoInicial, float shootIntervalSeconds = 0.2f, float detectRange = 600f, float projectileSpeed = 600f, float projectileRange = 600f)
+        public Boss(Texture2D textura, Vector2 posicaoInicial, float shootIntervalSeconds = 0.2f, float detectRange = 50f, float projectileSpeed = 50f, float projectileRange = 500)
         {
             this.textura = textura;
             this.posicao = posicaoInicial;
@@ -60,10 +60,10 @@ namespace Jogo
             Vector2 toPlayer = playerCenter - bossCenter;
             float dist = toPlayer.Length();
 
-            if (dist > detectRange)
+            if (dist > 500)
             {
                 // Se estiver fora do alcance, espera um intervalo antes de checar novamente
-                shootTimer = 0.5f;
+                shootTimer = 2f;
                 return;
             }
 
@@ -76,7 +76,7 @@ namespace Jogo
             var spawn = bossCenter;
 
             // Dispara o projétil
-            projetis.Add(new Projetil(spawn, direcao, projectileSpeed, projectileRange, isFromBoss: true));
+            projetis.Add(new Projetil(spawn, direcao, 300f, projectileRange, isFromBoss: true));
 
             // Reseta o timer com o intervalo de tiro
             shootTimer = shootInterval;

@@ -11,7 +11,7 @@ namespace Jogo
         Fosforos,
         Pilha,
         Chave,
-        Outro
+        FIM
     }
 
     internal class Item
@@ -58,6 +58,7 @@ namespace Jogo
                 case ItemType.Fosforos: tint = Color.Yellow*0.8f; break;
                 case ItemType.Pilha: tint = Color.Yellow*0.8f; break;
                 case ItemType.Chave: tint = Color.Yellow*0.8f; break;
+                case ItemType.FIM: tint = Color.Yellow * 0.8f; break;
                 default: tint = Color.Gray*0.8f; break;
             }
 

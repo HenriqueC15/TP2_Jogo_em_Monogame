@@ -36,6 +36,7 @@ namespace Jogo
         public bool IsAttacking = false;
         public bool attackfinish = true;
         public bool takedamage = false;
+        public bool especial = false;
 
         List<Projetil> projetis = new List<Projetil>();
         Texture2D projetil;
@@ -47,6 +48,7 @@ namespace Jogo
         private float attackTimer = 0f;
         private float couldownattack = 0f;
         private float couldowntiro = 0f;
+        private float couldownespecial = 0f;
         private const float attackDuration = 0.2f;
         private bool justAttacked = false;
 
@@ -142,7 +144,7 @@ namespace Jogo
         }
 
         // Atualizado: recebe Map para checar colisões
-        public void Update(GameTime gameTime, List<Projetil> projetis, Map map)
+        public void Update(GameTime gameTime, List<Projetil> projetis, Map map, List<Inimigo> inimigos)
         {
             KeyboardState currentState = Keyboard.GetState();
             Vector2 dir = Vector2.Zero;
@@ -231,15 +233,34 @@ namespace Jogo
                 if (couldowntiro <= 0f)
                 {
                     // projétil do jogador (IsFromBoss = false)
-                    projetis.Add(new Projetil(this.posicao, Facing, 400f, 700, isFromBoss: false));
-                    couldowntiro = 3f;
+                    projetis.Add(new Projetil(this.posicao, Facing, 700f, 700, isFromBoss: false));
+                    couldowntiro = 2f;
+                }
+            }
+
+            for (int i = inimigos.Count - 1; i >= 0; i--)
+            {
+                var inim = inimigos[i];
+                if (currentState.IsKeyDown(Keys.E) &&  inim.vida <= 0)
+                {
+                    especial = true;
+                    couldownattack = 3f;
                 }
             }
 
             if (couldowntiro > 0f)
             {
                 couldowntiro -= delta;
-                if (couldowntiro < 0f) couldowntiro = 0f;
+                if (couldowntiro < 0f)
+                {
+                    couldowntiro = 0f;
+                    especial = false;
+                }
+            }
+            if (couldownespecial > 0f)
+            {
+                couldownespecial -= delta;
+                if (couldownespecial < 0f) couldownespecial = 0f;
             }
             if (couldownattack > 0f)//somente atualiza timers se estivermos no meio do ataque ou cooldown
             {
@@ -273,16 +294,29 @@ namespace Jogo
             takedamage = true; // sinaliza que o jogador recebeu dano
         }
 
-        public void Draw(SpriteBatch spriteBatch, Texture2D pixel)
+        public void Draw(SpriteBatch spriteBatch, Texture2D pixel, Texture2D telafim, int verificafim)
         {
+            if (vida <= 0 && verificafim == 1)
+            {
+                spriteBatch.Draw(telafim, new Rectangle(0, 0, 1280, 720), Color.White);
+
+                return;
+            }
+            if (especial == true) 
+            { 
+                spriteBatch.Draw(pixel, new Rectangle(0, 0, 1280, 720), Color.White); 
+                return;
+            } 
+            // não desenha o jogador se estiver morto
+
             Color tint = Color.White;
             // desenha hitbox de ataque enquanto o ataque estiver ativo
             if (IsAttacking)
-                spriteBatch.Draw(pixel, AttackHitbox, Color.Red * 0.5f);
-            if (takedamage) tint = Color.Red; // indicador de dano recente
-            spriteBatch.Draw(pixel, HitboxColissao, Color.Blue * 0.5f);
+                spriteBatch.Draw(pixel, AttackHitbox, Color.White * 0f);
+            //if (takedamage) tint = Color.Red; // indicador de dano recente
+            //priteBatch.Draw(pixel, HitboxColissao, Color.Blue * 0.5f);
 
-            spriteBatch.Draw(pixel, Hitbox, Color.Red * 0.5f);
+            //spriteBatch.Draw(pixel, Hitbox, Color.Red * 0.5f);
 
             // seleciona spritesheet baseado na última direção
             Texture2D animTextura = lastDirection switch

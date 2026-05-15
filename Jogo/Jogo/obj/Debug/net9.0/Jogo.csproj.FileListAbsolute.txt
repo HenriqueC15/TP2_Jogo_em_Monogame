@@ -58,7 +58,94 @@ C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Deb
 C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Debug\net9.0\Content\vela_2.xnb
 C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Debug\net9.0\Content\bara_vida_1.xnb
 C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Debug\net9.0\Content\Tela_morte.xnb
+<<<<<<< Updated upstream
 C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Debug\net9.0\Content\4x4 SF Spritesheet.xnb
 C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Debug\net9.0\Content\5x5 SF Spritesheet.xnb
 C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Debug\net9.0\Content\8x8 Wide Spritesheet.xnb
 C:\Users\danie\OneDrive\Documentos\GitHub\TP2_Jogo_em_Monogame\Jogo\Jogo\bin\Debug\net9.0\Content\9x9 Font Spritesheet.xnb
+=======
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\almofada.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\ataque_boss.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\bara_vida_1.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\barra_de_texto.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\Boss.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\Casa_background.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\Casa_mobilia_1.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\Casa_mobilia_2.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\Colissoes_mobilia_2.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\Crianca.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\crianca_walk_down.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\crianca_walk_left.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\crianca_walk_right.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\crianca_walk_up.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\fosforo_1.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\fosforo_2.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\inimigo_1.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\inimigo_2.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\inimigo_3.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\Kirbycook.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\lanterna.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\Parede_Colissao.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\pilha.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\Tela_morte.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\vela_1.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\vela_2.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Jogo.exe
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Jogo.deps.json
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Jogo.runtimeconfig.json
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Jogo.dll
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Jogo.pdb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\MonoGame.Framework.dll
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\NVorbis.dll
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\android-arm\native\libopenal.so
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\android-arm64\native\libopenal.so
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\android-x64\native\libopenal.so
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\android-x86\native\libopenal.so
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\ios-arm64\native\libopenal.a
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\iossimulator-arm64\native\libopenal.a
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\iossimulator-x64\native\libopenal.a
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\linux-arm64\native\libopenal.so
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\linux-x64\native\libopenal.so
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\osx\native\libopenal.dylib
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\win-x64\native\openal.dll
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\linux-x64\native\libSDL2-2.0.so.0
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\osx\native\libSDL2-2.0.0.dylib
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\runtimes\win-x64\native\SDL2.dll
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\mgcb.tool.restore
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\Jogo.csproj.AssemblyReference.cache
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\Jogo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\Jogo.AssemblyInfoInputs.cache
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\Jogo.AssemblyInfo.cs
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\Jogo.csproj.CoreCompileInputs.cache
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\Jogo.sourcelink.json
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\Jogo.csproj.Up2Date
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\Jogo.dll
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\refint\Jogo.dll
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\Jogo.pdb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\Jogo.genruntimeconfig.cache
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\obj\Debug\net9.0\ref\Jogo.dll
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\ataque_especial_esquerda.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\ataque_especial_frente.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\boss_projetil.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\chave.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\esfregona.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\planta.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\sombra.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\Tela_fim.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\Tela_menu.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\crianca_walk_down_sps.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\crianca_walk_left_sps.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\crianca_walk_right_sps.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\crianca_walk_up_sps.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\ataque_direita_sps.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\ataque_especial_direita_sps.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\ataque_especial_esquerda_sps.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\ataque_especial_frente_sps.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\ataque_esquerda_sps.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\ataque_frente_sps.xnb
+>>>>>>> Stashed changes
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\4x4 SF Spritesheet.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\5x5 SF Spritesheet.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\8x8 Wide Spritesheet.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\9x9 Font Spritesheet.xnb
+C:\Users\Utilizador\source\repos\TP2_Jogo_em_Monogame2\Jogo\Jogo\bin\Debug\net9.0\Content\File.xnb

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Jogo
@@ -10,8 +11,10 @@ namespace Jogo
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private SpriteFont font;
         Texture2D textura;
         Texture2D mobilia;
+        Texture2D telafim;
         public Texture2D pixel;
         public Texture2D playerlife;
 
@@ -46,6 +49,7 @@ namespace Jogo
         private bool temFosforos = false;
         private int pilha = 0;
         private bool chave = false;
+        private bool fim = false;
 
         // --- Apenas o código relacionado à coleta de itens ---
         private List<Item> items = new List<Item>();
@@ -58,8 +62,11 @@ namespace Jogo
         private readonly Vector2 posPilha1 = new Vector2(970, 2700);
         private readonly Vector2 posChave = new Vector2(100, 1360);
         private readonly Vector2 posPilha2 = new Vector2(1200, 850);
+        private readonly Vector2 posBoss = new Vector2(500, 950);
 
         public bool Bossapareceu = false;
+
+        private bool Gamestarted = false;
 
         // estágio de progressão de spawn:
         // 0 = vela+lanterna+fosforos (iniciais)
@@ -86,7 +93,7 @@ namespace Jogo
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            font = Content.Load<SpriteFont>("File");
             // Carrega as texturas
             mobilia = Content.Load<Texture2D>("Colissoes_mobilia_2");
             mapa = new Map(mobilia, mobilia, Content.Load<Texture2D>("Parede_Colissao"), 3800, 3800, GraphicsDevice);
@@ -135,18 +142,36 @@ namespace Jogo
             collectionZones[ItemType.Fosforos] = new Rectangle(210, 1700, 160, 160);
             collectionZones[ItemType.Pilha] = new Rectangle(970, 2700, 120, 120);
             collectionZones[ItemType.Chave] = new Rectangle(100, 1360, 160, 160);
+            collectionZones[ItemType.FIM] = new Rectangle(500, 950, 120, 120);
 
             // spawna os itens iniciais (vela, lanterna, fósforos)
             SpawnStageItems();
 
             // Cria o diálogo inicial
-            Texture2D barraDialogo = Content.Load<Texture2D>("barra_de_texto");
-            dialogManager.AddDialog(barraDialogo, fonte, "tenho que encontrar uma fonte de luz", 5f, new Vector2(240, 550));
+            //Texture2D barraDialogo = Content.Load<Texture2D>("barra_de_texto");
+            //dialogManager.AddDialog(barraDialogo, fonte, "tenho que encontrar uma fonte de luz", 5f, new Vector2(240, 550));
         }
 
         protected override void Update(GameTime gameTime)
         {
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (!Gamestarted)
+            {
+                if (keyboardState.IsKeyDown(Keys.Enter))
+                {
+                    Gamestarted = true;
+                }
+                else if (keyboardState.IsKeyDown(Keys.F))
+                {
+                    Exit();
+                }
+                else
+                {
+                    base.Update(gameTime);
+                    return; // não atualiza o jogo se ainda não começou
+                }
+            }
 
             camera.Follow(player.posicao);
 
@@ -155,9 +180,6 @@ namespace Jogo
 
             // Atualiza o gestor de diálogos
             dialogManager.Update(gameTime);
-
-            // Atualiza jogador (colisões tratadas internamente)
-            player.Update(gameTime, projetis, mapa);
 
             // --- Atualiza condições de spawn: marca requested quando condição aparece ---
             if (!spawnedHorda1 && !requestedHorda1 && temVela && temLanterna && temFosforos)
@@ -205,6 +227,8 @@ namespace Jogo
                     requestedHorda3 = false;
                 }
             }
+            // Atualiza jogador (colisões tratadas internamente)
+            player.Update(gameTime, projetis, mapa, inimigos);
 
             // Atualiza projéteis e checa colisões com todos os inimigos
             for (int i = projetis.Count - 1; i >= 0; i--)
@@ -277,6 +301,7 @@ namespace Jogo
                         else SetPilha(2);
                         break;
                     case ItemType.Chave: SetChave(true); break;
+                    case ItemType.FIM: SetFim(true); break;
                 }
             }
 
@@ -306,6 +331,13 @@ namespace Jogo
                     collectionStage = 3;
                     SpawnStageItems();
                 }
+            } else if (collectionStage == 3)
+            {
+                if (boss.IsAlive == false && Collected(ItemType.Chave)) 
+                {
+                    collectionStage = 4;
+                    SpawnStageItems();
+                }
             }
             // --- spawn do boss apenas quando a segunda pilha for coletada (pilha == 2)
             if (pilha == 2)
@@ -328,6 +360,38 @@ namespace Jogo
                     if (projetis[i].Bounds.Intersects(boss.Hitbox) && !projetis[i].IsFromBoss)
                     {
                         boss.ReceberDano(player.tiro);
+                        projetis[i].Ativo = false;
+                        break; // projétil já colidiu
+                    }
+
+                    if (projetis[i].Bounds.Intersects(player.Hitbox) && projetis[i].IsFromBoss)
+                    {
+                        player.receberDano(boss.dano);
+                        projetis[i].Ativo = false;
+                        break; // projétil já colidiu
+                    }
+
+                    if (!projetis[i].Ativo)
+                        projetis.RemoveAt(i);
+                }
+            }
+
+            boss.Update(gameTime, player, projetis);
+
+            if (player != null && boss.IsAlive && Bossapareceu)
+            {
+
+                // Delegamos ao boss a verificação e aplicação de dano pelo ataque do jogador
+                boss.CheckAndApplyPlayerAttack(player);
+                for (int i = projetis.Count - 1; i >= 0; i--)
+                {
+                    projetis[i].Update(gameTime);
+
+                    //if (!boss.IsAlive) continue;
+
+                    if (projetis[i].Bounds.Intersects(player.Hitbox) && projetis[i].IsFromBoss)
+                    {
+                        player.receberDano(boss.dano);
                         projetis[i].Ativo = false;
                         break; // projétil já colidiu
                     }
@@ -358,7 +422,7 @@ namespace Jogo
                     item.Draw(_spriteBatch, Content.Load<Texture2D>("almofada"));
             }
 
-            player.Draw(_spriteBatch, pixel);
+            player.Draw(_spriteBatch, pixel,Content.Load<Texture2D>("Tela_Morte"), 0);
 
             // desenha todos os inimigos
             foreach (var inim in inimigos)
@@ -366,15 +430,16 @@ namespace Jogo
                 inim.Draw(_spriteBatch, pixel);
             }
 
+            if (Bossapareceu)
+            {
+                boss.Draw(_spriteBatch, Content.Load<Texture2D>("Boss"));
+            }
+
+            _spriteBatch.Draw(Content.Load<Texture2D>("sombra"), new Rectangle(0, 0, 3800, 3800), Color.White);
             // desenha os itens
             foreach (var it in items)
             {
                 it.Draw(_spriteBatch, pixel);
-            }
-
-            if (Bossapareceu)
-            {
-                boss.Draw(_spriteBatch, Content.Load<Texture2D>("Boss"));
             }
 
             _spriteBatch.End();
@@ -392,6 +457,18 @@ namespace Jogo
             // Desenha o gestor de diálogos
             dialogManager.Draw(_spriteBatch);
 
+            player.Draw(_spriteBatch, pixel, Content.Load<Texture2D>("Tela_Morte"), 1);
+            if(Gamestarted == false)
+            {   
+                _spriteBatch.Draw(Content.Load<Texture2D>("Tela_menu"), new Rectangle(0, 0, 1280, 720), Color.White);
+                _spriteBatch.DrawString(font, "Jogar (Enter)", new Vector2(900, 300), Color.White);
+                _spriteBatch.DrawString(font, "Sair Tristemente (F)", new Vector2(900, 350), Color.White);
+            }
+            if(fim == true)
+            {
+                _spriteBatch.Draw(Content.Load<Texture2D>("Tela_fim"), new Rectangle(-150, 0, 1500, 720), Color.White);
+            }
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -403,6 +480,7 @@ namespace Jogo
         public void SetFosforos(bool v) => temFosforos = v;
         public void SetPilha(int p) => pilha = p;
         public void SetChave(bool v) => chave = v;
+        public void SetFim(bool v) => fim = v;
 
         // Spawna os itens correspondentes ao estágio atual (não duplica itens já existentes)
         private void SpawnStageItems()
@@ -426,6 +504,10 @@ namespace Jogo
             else if (collectionStage == 3)
             {
                 if (!ExistsNotCollected(ItemType.Pilha)) items.Add(new Item(ItemType.Pilha, posPilha2));
+            }
+            else if (collectionStage == 4)
+            {
+                if (!ExistsNotCollected(ItemType.FIM)) items.Add(new Item(ItemType.FIM, posBoss));
             }
         }
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/barra_de_texto.png</SourceFile>
-  <SourceTime>2026-05-14T15:06:24.2325703+01:00</SourceTime>
-  <DestFile>C:/Users/danie/OneDrive/Documentos/GitHub/TP2_Jogo_em_Monogame/Jogo/Jogo/Content/bin/DesktopGL/Content/barra_de_texto.xnb</DestFile>
-  <DestTime>2026-05-14T15:15:51.8197944+01:00</DestTime>
+  <SourceFile>C:/Users/Utilizador/source/repos/TP2_Jogo_em_Monogame2/Jogo/Jogo/Content/barra_de_texto.png</SourceFile>
+  <SourceTime>2026-05-14T19:27:25.4414749+01:00</SourceTime>
+  <DestFile>C:/Users/Utilizador/source/repos/TP2_Jogo_em_Monogame2/Jogo/Jogo/Content/bin/DesktopGL/Content/barra_de_texto.xnb</DestFile>
+  <DestTime>2026-05-15T00:21:13.9160127+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-10-20T15:25:32+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

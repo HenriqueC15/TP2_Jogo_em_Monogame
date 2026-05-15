@@ -24,7 +24,8 @@ namespace Jogo
         private const float attackCooldownDuration = 1.0f; // tempo entre ataques do inimigo
         private float attackRange = 60f; // alcance do ataque (ajuste conforme necessário)
 
-        public bool IsAlive => vida > 0;
+        public bool Especial = false;
+        public bool IsAlive => Especial == false;
         public bool takedamage = false;
         public bool isTakedamage = false;
         public Inimigo(Texture2D textura, Vector2 posicaoInicial, int vida, float speed = 250f, float viewRadius = 400f, float stopDistance = 40f)
@@ -52,7 +53,11 @@ namespace Jogo
             var delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Vector2 toPlayer = player.posicao - posicao;
             float dist = toPlayer.Length();
-
+            if (vida <= 0)
+            {
+                speed = 0f;
+            }
+            Especial = player.especial;
             // movimentação simples: se estiver dentro do raio de visão, mas fora da distância de parada, move em direção ao jogador
             if (dist <= viewRadius && dist > stopDistance)
             {
@@ -96,7 +101,7 @@ namespace Jogo
             Color tint = Color.White;
             if (vida <= 2) tint = Color.OrangeRed; // indicador simples de dano
             if (takedamage) tint = Color.Red; // indicador de dano recente
-            spriteBatch.Draw(pixel, Hitbox, Color.Red * 0.5f);
+            //spriteBatch.Draw(pixel, Hitbox, Color.Red * 0.5f);
             spriteBatch.Draw(textura, new Rectangle((int)posicao.X, (int)posicao.Y, 150, 150), tint);
         }
 
